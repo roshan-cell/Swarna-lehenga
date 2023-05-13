@@ -7,9 +7,19 @@ import {
   AiOutlinePlusCircle,
   AiOutlineMinusCircle,
 } from "react-icons/ai";
-import { BsFillBagCheckFill } from "react-icons/bs";
 
-const NavBar = () => {
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CategoryIcon from "@mui/icons-material/Category";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import PersonIcon from "@mui/icons-material/Person";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+
+
+
+const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
   const toggleCart = () => {
     if (ref.current.classList.contains("translate-x-full")) {
       ref.current.classList.remove("translate-x-full");
@@ -57,7 +67,7 @@ const NavBar = () => {
         onClick={toggleCart}
         className="cart cursor-pointer absolute right-0 top-4 mx-5"
       >
-        <AiOutlineShoppingCart className="text-xl  md:text-3xl my-3 " />
+        <ShoppingCartIcon className="text-xl  md:text-3xl my-3 " />
       </div>
 
       <div
@@ -70,31 +80,116 @@ const NavBar = () => {
           className="absolute top-5 right-2 cursor-pointer text-2xl text-blue-50-100"
         >
           {" "}
-          <AiFillCloseCircle />{" "}
+          <CloseIcon />{" "}
         </span>
-        <ol className="list-decimal font-semibold">
-          <li>
-            <div className="item flex my-5">
-              <span className="w-2/3 font-semibold">Sneakers</span>
-              <span className="flex font-semibold items-center justify-center w-1/3 text-lg">
-                {" "}
-                <AiOutlinePlusCircle className="cursor-pointer bg-pink-500" />
-                <span className="mx-2"> 2 </span>{" "}
-                <AiOutlineMinusCircle className="cursor-pointer bg-pink-500" />{" "}
-              </span>
-            </div>
-          </li>
-        </ol>
-      
+        <ul className="flex flex-col divide-y divide-gray-300">
+          {/* to display no itmes in the cart message  */}
+          {Object.keys(cart).length == 0 && (
+            <div className="mb-10">No Items in the cart</div>
+          )}
+
+          {/* mapping cart items  */}
+          {Object.keys(cart).map((k) => {
+            return (
+              <li
+                key={k}
+                className="flex flex-col py-6 sm:flex-row sm:justify-between"
+              >
+                <div className="flex w-full space-x-2 sm:space-x-4">
+                  {/* <img
+                            className="flex-shrink-0 object-cover w-20 h-20 border-transparent rounded outline-none sm:w-32 sm:h-32 bg-gray-500"
+                            src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80"
+                            alt="Polaroid camera"
+                          /> */}
+                  <div className="flex flex-col justify-between w-full pb-4">
+                    <div className="flex justify-between w-full pb-2 space-x-2">
+                      <div className="space-y-1">
+                        <h3 className="text-lg font-semibold leading-snug sm:pr-8">
+                          <span>{cart[k].productName}</span>{" "}
+                          <span>{cart[k].size}</span>
+                        </h3>
+                        <p className="">
+                          Items:{" "}
+                          <span className="font-semibold">
+                            {cart[k].quantity}
+                          </span>
+                        </p>
+                        <p className="">₹{cart[k].price}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg font-semibold">
+                          ₹{cart[k].price * cart[k].quantity}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex text-lg divide-x">
+                      <button
+                        type="button"
+                        className="flex items-center px-2 py-1 pl-0 space-x-1"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 512 512"
+                          className="w-4 h-4 fill-current"
+                        >
+                          <path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
+                          <rect width="32" height="200" x="168" y="216"></rect>
+                          <rect width="32" height="200" x="240" y="216"></rect>
+                          <rect width="32" height="200" x="312" y="216"></rect>
+                          <path d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"></path>
+                        </svg>
+                        <span>Remove</span>
+                      </button>
+                      <div className="flex items-center flex-row px-2 py-1 space-x-1">
+                        <RemoveIcon
+                          onClick={() => {
+                            removeFromCart(
+                              k,
+                              1,
+                              cart[k].price,
+                              cart[k].productName,
+                              cart[k].size,
+                              cart[k].variant
+                            );
+                          }}
+                          className="cursor-pointer"
+                        ></RemoveIcon>
+                        <span>{cart[k].quantity}</span>
+                        <AddIcon
+                          onClick={() => {
+                            addtoCart(
+                              k,
+                              1,
+                              cart[k].price,
+                              cart[k].productName,
+                              cart[k].size,
+                              cart[k].variant
+                            );
+                          }}
+                          className="cursor-pointer"
+                        ></AddIcon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+
+
+
         <div className="flex">
           <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded text-sm">
-            <BsFillBagCheckFill className="m-1" /> Checkout
+            <BookmarkIcon className="m-1" /> Checkout
           </button>
 
-          <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded text-sm">
-            <BsFillBagCheckFill className="m-1" /> Clear
+          <button
+            onClick={clearCart}
+            className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded text-sm"
+          >
+            <BookmarkIcon className="m-1" /> Clear Cart
           </button>
-
         </div>
       </div>
     </div>
