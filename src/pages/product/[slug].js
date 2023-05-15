@@ -220,7 +220,7 @@ const Slug = ({addtoCart} ) => {
 
               <div className="pin mt-6 flex space-x-2 text-sm">
                 <input
-                  onClick={onChangePin}
+                  onChange={onChangePin}
                   type="text"
                   className="px-2 border-2 border-gray-400 rounded-md"
                   placeholder="Enter pincode"
@@ -232,6 +232,7 @@ const Slug = ({addtoCart} ) => {
                   Check
                 </button>
               </div>
+
 
               {!service && service != null && (
                 <div className="text-red-700 text-sm mt-3">Not Available!</div>

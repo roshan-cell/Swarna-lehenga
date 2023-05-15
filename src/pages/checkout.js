@@ -84,7 +84,7 @@ const Checkout = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
             Product Description
           </label>
 
-          <textarea name="description" id="" cols="30" rows="10" className="w-full rounded-md border  px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500">
+          <textarea name="description" id="" cols="10" rows="2" className="w-full rounded-md border  px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500">
               Enter the Product Description here...
           </textarea>
 
@@ -432,29 +432,29 @@ const Checkout = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
           <div className="mx-auto">
             <div>
               <div className="flex items-center justify-between ">
-                <p className="text-sm font-medium text-rose-900 dark:text-white">
+                <p className="text-sm font-medium text-rose-900 ">
                   Subtotal
                 </p>
-                <p className="font-semibold text-rose-900 dark:text-white">
-                  ${subTotal}
+                <p className="font-semibold text-rose-900 ">
+                  ₹{subTotal}
                 </p>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-rose-900 dark:text-white">
+                <p className="text-sm font-medium text-rose-900 ">
                   Shipping
                 </p>
-                <p className="font-semibold text-rose-900 dark:text-white">
-                  $8.00
+                <p className="font-semibold text-rose-900 ">
+                  ₹8.00
                 </p>
               </div>
             </div>
             <div>
               <div className="">
-                <p className="text-sm font-medium text-rose-900 dark:text-white">
+                <p className="text-sm font-medium text-rose-900">
                   Total
                 </p>
                 <p className="text-2xl font-semibold text-rose-900 dark:text-white">
-                  ${subTotal !== 0 ? subTotal + 8 : 0}
+                  ₹{subTotal !== 0 ? subTotal + 8 : 0}
                 </p>
               </div>
               <Link href="/order">

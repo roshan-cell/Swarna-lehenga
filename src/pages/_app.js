@@ -78,7 +78,7 @@ export default function App({
       newCart[itemCode].quantity = cart[itemCode].quantity - quantity;
     }
     // if quantity is equal to zero then
-    if (newCart[itemCode]["quantity"] <= 0) {
+    if (newCart[itemCode].quantity <= 0) {
       delete newCart[itemCode];
     }
     setCart(newCart);
