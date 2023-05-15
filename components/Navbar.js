@@ -62,10 +62,11 @@ const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
       </div>
 
       <div
-        onClick={toggleCart}
-        className="cart cursor-pointer absolute right-0 top-4 mx-5"
+        
+        className="cart cursor-pointer absolute right-0 top-4 mx-5 flex"
       >
-        <ShoppingCartIcon className="text-xl  md:text-3xl my-3 " />
+        <Link href={'/login'} > <PersonIcon className="text-xl  md:text-3xl my-3" /> </Link>
+        <ShoppingCartIcon onClick={toggleCart} className="text-xl  md:text-3xl my-3 " />
       </div>
 
       <div
@@ -195,7 +196,9 @@ const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
               <span className="">₹{subTotal}</span>
             </p>
             {!Object.keys(cart).length == 0 && (
-              <p className="text-sm ">*not including taxes and shipping costs</p>
+              <p className="text-sm ">
+                *not including taxes and shipping costs
+              </p>
             )}
           </div>
 

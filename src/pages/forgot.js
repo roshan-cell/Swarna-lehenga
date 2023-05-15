@@ -1,38 +1,20 @@
-import React from 'react'
-import Link from 'next/link';
-import {toast, ToastContainer } from "react-toastify";
-  import "react-toastify/dist/ReactToastify.css";
+import React from "react";
+import Link from "next/link";
 
-const Signup = () => {
+const forgot = () => {
   return (
     <div>
       <section className="min-h-screen flex items-stretch text-white ">
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-        {/* Same as */}
-        <ToastContainer />
         <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center bg-[url(https://source.unsplash.com/random/?shoes)]">
           <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
           <div className="w-full px-24 z-10">
             <h1 className="text-5xl font-bold text-left tracking-wide">
               Keep it special
             </h1>
-            <p className="text-3xl my-4">
-             Shoes defines your lifestyle
-            </p>
+            <p className="text-3xl my-4">Shoes defines your lifestyle</p>
           </div>
         </div>
-        <div className="lg:w-1/2 w-full flex flex-col items-center justify-center text-center md:px-16 px-0 z-0 ">
+        <div className="lg:w-1/2 w-full flex flex-col items-center justify-center text-center md:px-16 px-0 z-0 bg-pink-50">
           {/* signup component start */}
           <div
             className="
@@ -50,60 +32,14 @@ const Signup = () => {
         "
           >
             <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
-              Sign-up for your account
+              Write New Password
             </div>
             <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
-              Enter your credentials
+              Enter new credentials
             </div>
 
             <div className="mt-10">
-              <form>
-                <div className="flex flex-col mb-5">
-                  <label
-                    htmlFor="name"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
-                  >
-                    Full Name:
-                  </label>
-                  <div className="relative">
-                    <div
-                      className="
-                    inline-flex
-                    items-center
-                    justify-center
-                    absolute
-                    left-0
-                    top-0
-                    h-full
-                    w-10
-                    text-gray-400
-                  "
-                    >
-                      <i className="fas fa-at text-rose-500"></i>
-                    </div>
-
-                    <input
-                      id="name"
-                      type="text"
-                      name="name"
-                      className="
-                    text-sm
-                    placeholder-gray-500
-                    pl-10
-                    pr-4
-                    rounded-2xl
-                    border border-gray-400
-                    w-full
-                    py-2
-                    focus:outline-none focus:border-rose-400
-                    bg-pink-50 text-black
-                  "
-                     
-          
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-                </div>
+              <form action="#">
                 <div className="flex flex-col mb-5">
                   <label
                     htmlFor="email"
@@ -144,9 +80,7 @@ const Signup = () => {
                     focus:outline-none focus:border-rose-400
                     bg-pink-50 text-black
                   "
-          
                       placeholder="Enter your email"
-                      
                     />
                   </div>
                 </div>
@@ -192,8 +126,6 @@ const Signup = () => {
                     focus:outline-none focus:border-rose-400
                     bg-pink-50 text-black
                   "
-                      
-                      
                       placeholder="create your password"
                     />
                   </div>
@@ -220,7 +152,7 @@ const Signup = () => {
                   ease-in
                 "
                   >
-                    <span className="mr-2 uppercase">Sign Up</span>
+                    <span className="mr-2 uppercase">Change Password</span>
                     <span>
                       <svg
                         className="h-6 w-6"
@@ -245,25 +177,24 @@ const Signup = () => {
               className="
             inline-flex
             items-center
-            text-rose-700
+            text-gray-700
             font-medium
             text-xs text-center
           "
             >
               <span className="ml-2">
-                Already have an account?
                 <div className="text-xs ml-2 text-rose-500 font-semibold">
-                  Login now
+                  Login with new credentials
                 </div>
               </span>
             </Link>
           </div>
 
-          {/* signup component end */}
+          {/* forgot component end */}
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default forgot;

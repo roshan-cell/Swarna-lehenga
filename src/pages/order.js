@@ -19,13 +19,13 @@ const Order = () => {
               </p>
 
               <div className="flex mb-4">
-                <a className="flex-grow text-center   py-2 text-lg px-1">
+                <a className="flex-grow text-center    py-2 text-lg px-1">
                   Description
                 </a>
-                <a className="flex-grow text-center border-gray-300 py-2 text-lg px-1">
+                <a className="flex-grow text-center  border-gray-300 py-2 text-lg px-1">
                   Quantity
                 </a>
-                <a className="flex-grow text-center border-gray-300 py-2 text-lg px-1">
+                <a className="flex-grow text-center  border-gray-300 py-2 text-lg px-1">
                   Total
                 </a>
               </div>
