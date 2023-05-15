@@ -17,8 +17,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-
-
 const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
   const toggleCart = () => {
     if (ref.current.classList.contains("translate-x-full")) {
@@ -33,7 +31,7 @@ const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
   const ref = useRef();
 
   return (
-    <div className="flex flex-col md:flex-row md:justify-start justify-center items-center  py-2 shadow-md">
+    <div className="flex flex-col md:flex-row md:justify-start justify-center items-center  py-2 shadow-md sticky top-0 bg-white z-10 ">
       <div className="logo mx-5">
         <Link href={"/"}>
           {" "}
@@ -72,16 +70,15 @@ const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
 
       <div
         ref={ref}
-        className="w-72 h-full sidebar cursor-pointer absolute top-0 right-0 bg-yellow-100 px-5 py-10 transform transition-transform translate-x-full"
+        className={`sidebar lg:absolute fixed lg:top-0 bottom-20 right-0 bg-yellow-100 dark:bg-rose-900 md:dark:bg-gray-700 dark:text-white transition-transform transform translate-x-full translate-x-0'} md:rounded-b-xl rounded-xl lg:h-[90vh] shadow-md z-10 overflow-y-scroll`}
       >
-        <h2 className="font-bold text-xl text-center"> Shopping Cart</h2>
-        <span
-          onClick={toggleCart}
-          className="absolute top-5 right-2 cursor-pointer text-2xl text-blue-50-100"
-        >
-          {" "}
-          <CloseIcon />{" "}
-        </span>
+        <CloseIcon
+                className="text-red-600 rounded-full border-2 p-1 text-3xl absolute top-0 right-0 border-red-600 m-4 cursor-pointer"
+                onClick={toggleCart}
+              ></CloseIcon>
+
+              <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 text-gray-800 dark:text-white">
+                <h2 className="text-xl font-semibold">Your cart</h2>
         <ul className="flex flex-col divide-y divide-gray-300">
           {/* to display no itmes in the cart message  */}
           {Object.keys(cart).length == 0 && (
@@ -177,12 +174,12 @@ const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
           })}
         </ul>
 
-
-
         <div className="flex">
-          <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded text-sm">
-            <BookmarkIcon className="m-1" /> Checkout
-          </button>
+          <Link href="/checkout">
+            <button className="flex mr-2 text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded text-sm">
+              <BookmarkIcon className="m-1" /> Checkout
+            </button>{" "}
+          </Link>
 
           <button
             onClick={clearCart}
@@ -192,6 +189,7 @@ const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -3,7 +3,10 @@ import { useState  , useEffect} from 'react'
 import Footer from '../../components/Footer'
 import NavBar from '../../components/Navbar'
 
-export default function App({ Component, pageProps }) {
+export default function App({ 
+  Component, pageProps 
+  
+}) {
 
   // Add to card function
   const [cart, setCart] = useState({})
