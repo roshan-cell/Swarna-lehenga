@@ -13,5 +13,6 @@ const handler = async (req, res) => {
       res.status(400).json({error : "This method is not allowed"})
   }
 };
+// Completed
 
 export default connectDb(handler);
