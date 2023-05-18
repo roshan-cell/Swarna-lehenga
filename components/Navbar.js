@@ -65,7 +65,7 @@ const NavBar = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
         
         className="cart cursor-pointer absolute right-0 top-4 mx-5 flex"
       >
-        <Link href={'/login'} > <PersonIcon className="text-xl  md:text-3xl my-3" /> </Link>
+        <Link href={'/login'} > <a> <PersonIcon className="text-xl  md:text-3xl my-3" /> </a> </Link>
         <ShoppingCartIcon onClick={toggleCart} className="text-xl  md:text-3xl my-3 " />
       </div>
 
