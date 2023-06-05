@@ -1,9 +1,51 @@
-import React from 'react'
-import Link from 'next/link';
-import {toast, ToastContainer } from "react-toastify";
-  import "react-toastify/dist/ReactToastify.css";
+import React, { useState } from "react";
+import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleChange = (e) => {
+    if (e.target.name == "name") {
+      setName(e.target.value);
+    } else if (e.target.name == "email") {
+      setEmail(e.target.value);
+    } else if (e.target.name == "password") {
+      setPassword(e.target.value);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = { name, email, password };
+    let res = await fetch("http://localhost:3000/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let response = await res.json();
+    console.log(response);
+
+    setEmail("");
+    setName("");
+    setPassword("");
+    toast.success("Your Account has been created, Step Into the Elegance!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   return (
     <div>
       <section className="min-h-screen flex items-stretch text-white ">
@@ -27,9 +69,7 @@ const Signup = () => {
             <h1 className="text-5xl font-bold text-left tracking-wide">
               Keep it special
             </h1>
-            <p className="text-3xl my-4">
-             Shoes defines your lifestyle
-            </p>
+            <p className="text-3xl my-4">Shoes defines your lifestyle</p>
           </div>
         </div>
         <div className="lg:w-1/2 w-full flex flex-col items-center justify-center text-center md:px-16 px-0 z-0 ">
@@ -57,7 +97,7 @@ const Signup = () => {
             </div>
 
             <div className="mt-10">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="flex flex-col mb-5">
                   <label
                     htmlFor="name"
@@ -83,6 +123,8 @@ const Signup = () => {
                     </div>
 
                     <input
+                      onChange={handleChange}
+                      value={name}
                       id="name"
                       type="text"
                       name="name"
@@ -98,8 +140,6 @@ const Signup = () => {
                     focus:outline-none focus:border-rose-400
                     bg-pink-50 text-black
                   "
-                     
-          
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -129,6 +169,8 @@ const Signup = () => {
                     </div>
 
                     <input
+                      onChange={handleChange}
+                      value={email}
                       id="email"
                       type="email"
                       name="email"
@@ -144,9 +186,7 @@ const Signup = () => {
                     focus:outline-none focus:border-rose-400
                     bg-pink-50 text-black
                   "
-          
                       placeholder="Enter your email"
-                      
                     />
                   </div>
                 </div>
@@ -177,6 +217,8 @@ const Signup = () => {
                     </div>
 
                     <input
+                      onChange={handleChange}
+                      value={password}
                       id="password"
                       type="password"
                       name="password"
@@ -192,8 +234,6 @@ const Signup = () => {
                     focus:outline-none focus:border-rose-400
                     bg-pink-50 text-black
                   "
-                      
-                      
                       placeholder="create your password"
                     />
                   </div>
@@ -263,7 +303,7 @@ const Signup = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
