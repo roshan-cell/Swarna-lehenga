@@ -4,11 +4,71 @@ import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Link from "next/link";
+import Head from "next/head";
+import Script from "next/script";
 
 const Checkout = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
+  const initiatePayment = async() => {
+
+    let oid  =  Math.floor(Math.random() * Date.now()) ;
+
+    // Get a transaction token
+    const data = {cart , subTotal , oid , email : "email"};
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction` ,  {
+      method : 'POST' ,
+      headers : {
+        'Content-Type' : 'application/json',
+      },
+      body : JSON.stringify(data),
+    })
+
+    let txnToken = await a.json()
+    console.log(txnToken) 
+    
+
+    var config = {
+      root: "",
+      flow: "DEFAULT",
+      data: {
+        orderId: oid /* update order id */,
+        token: txnToken /* update token value */,
+        tokenType: "TXN_TOKEN",
+        amount: subTotal /* update amount */,
+      },
+      handler: {
+        notifyMerchant: function (eventName, data) {
+          console.log("notifyMerchant handler function called");
+          console.log("eventName => ", eventName);
+          console.log("data => ", data);
+        },
+      },
+    };
+ 
+        window.Paytm.CheckoutJS.init(config)
+          .then(function onSuccess() {
+            // after successfully updating configuration, invoke JS Checkout
+            window.Paytm.CheckoutJS.invoke();
+          })
+          .catch(function onError(error) {
+            console.log("error => ", error);
+          });
+      
+  };
   return (
     <>
       <div className="md:mt-10 mb-12 h-full  px-4 pt-8 lg:mt-0">
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
+          />
+        </Head>
+        <Script
+          type="application/javascript"
+          src={`${process.env.NEXT_PUBLIC_HOST}/merchantpgpui/checkoutjs/merchants/{process.env.NEXT_PUBLIC_PAYTM_MID}.js`}
+          onload="onScriptLoad();"
+          crossorigin="anonymous"
+        />
         <p className="text-xl font-medium">1.Delivery Details</p>
 
         <div className="">
@@ -84,8 +144,14 @@ const Checkout = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
             Product Description
           </label>
 
-          <textarea name="description" id="" cols="10" rows="2" className="w-full rounded-md border  px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500">
-              Enter the Product Description here...
+          <textarea
+            name="description"
+            id=""
+            cols="10"
+            rows="2"
+            className="w-full rounded-md border  px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+          >
+            Enter the Product Description here...
           </textarea>
 
           <label
@@ -432,32 +498,23 @@ const Checkout = ({ cart, addtoCart, removeFromCart, clearCart, subTotal }) => {
           <div className="mx-auto">
             <div>
               <div className="flex items-center justify-between ">
-                <p className="text-sm font-medium text-rose-900 ">
-                  Subtotal
-                </p>
-                <p className="font-semibold text-rose-900 ">
-                  ₹{subTotal}
-                </p>
+                <p className="text-sm font-medium text-rose-900 ">Subtotal</p>
+                <p className="font-semibold text-rose-900 ">₹{subTotal}</p>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-rose-900 ">
-                  Shipping
-                </p>
-                <p className="font-semibold text-rose-900 ">
-                  ₹8.00
-                </p>
+                <p className="text-sm font-medium text-rose-900 ">Shipping</p>
+                <p className="font-semibold text-rose-900 ">₹8.00</p>
               </div>
             </div>
             <div>
               <div className="">
-                <p className="text-sm font-medium text-rose-900">
-                  Total
-                </p>
-                <p className="text-2xl font-semibold text-rose-900 dark:text-white">
+                <p className="text-sm font-medium text-rose-900">Total</p>
+                <p className="text-2xl font-semibold text-rose-900 ">
                   ₹{subTotal !== 0 ? subTotal + 8 : 0}
                 </p>
               </div>
-              <Link href="/order">
+              <Link href="/order" onClick={initiatePayment}>
+                
                 <button className="mt-4 mb-8 h-10 w-full rounded-md bg-rose-900 px-6 py-3 font-medium text-white">
                   Place Order
                 </button>
