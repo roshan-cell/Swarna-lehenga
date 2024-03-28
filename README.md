@@ -1,4 +1,4 @@
-# ShoeKart - The Ultimate Destination for Luxurious Indian Fashion
+# Swarnalehenga - The Ultimate Destination for Luxurious Indian Fashion
 
 #### Link: https://swarnalehenga.vercel.app/
 
