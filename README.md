@@ -2,7 +2,7 @@
 
 #### Link: https://swarnalehenga.vercel.app/
 
-Welcome to ShoeKart, a full-stack MERN-based website for Indian ethnic wear built with Next.js. This website offers a unique online shopping experience for those who are looking for authentic and luxurious Indian fashion.
+Welcome to ShoeKart, a full-stack MERN-based website for Indian ethnic . This website offers a unique online shopping experience for those who are looking for authentic and luxurious Indian fashion.
 
 
 # Features
@@ -23,5 +23,4 @@ ShoeKart provides the following features:
 - Express: a Node.js framework used to build the server-side API.
 - React: a JavaScript library used to build the user interface.
 - Tailwind: a utility-first open source CSS framework.
-- Next.js: a React-based framework used for server-side rendering.
 - Node.js: a JavaScript runtime used to execute server-side code.
