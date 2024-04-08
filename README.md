@@ -1,8 +1,8 @@
 # Swarnalehenga - The Ultimate Destination for Luxurious Indian Fashion
 
-#### Link: https://swarnalehenga.vercel.app/
+# Link: https://swarnalehenga.vercel.app/
 
-Welcome to ShoeKart, a full-stack MERN-based website for Indian ethnic . This website offers a unique online shopping experience for those who are looking for authentic and luxurious Indian fashion.
+Welcome to Swarnalehenga, a full-stack MERN-based website for Indian ethnic . This website offers a unique online shopping experience for those who are looking for authentic and luxurious Indian fashion.
 
 
 # Features
